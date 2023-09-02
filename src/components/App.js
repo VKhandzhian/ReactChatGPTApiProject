@@ -21,10 +21,7 @@ const App = () => {
             setAnswer(response?.choices?.[0]?.message?.content);
         }).catch(error => {
             setAnswer('Sorry, something was happen: ' + error);
-        });
-
-        console.log('answer', answerFromChatGPT);
-        
+        });        
     }
 
     return (
