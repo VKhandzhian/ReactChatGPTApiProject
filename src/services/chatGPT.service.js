@@ -1,3 +1,5 @@
+import requestConstants from '../constants/request.constant'
+
 const sendQuestionToChatGPT = async (question) => {
 
     const payload = {
@@ -11,11 +13,11 @@ const sendQuestionToChatGPT = async (question) => {
         ]  
     }
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
+    const response = await fetch(requestConstants.apis.CHAT_GPT_API, {
+        method: requestConstants.methods.POST,
         headers: {
           'Authorization': 'Bearer ' + process.env.REACT_APP_CHAT_GPT_API_KEY,
-          'Content-Type': 'application/json',
+          'Content-Type': requestConstants.contentTypes.APP_JSON,
         },
         body: JSON.stringify(payload),
     });
