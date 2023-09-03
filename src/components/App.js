@@ -15,13 +15,8 @@ const App = () => {
         setQuestion(event.target.value);
     }
 
-    const questionHandler = () => {
-        const answerFromChatGPT = sendQuestionToChatGPT(question);
-        answerFromChatGPT.then(response => {
-            setAnswer(response?.choices?.[0]?.message?.content);
-        }).catch(error => {
-            setAnswer('Sorry, something was happen: ' + error);
-        });        
+    const questionHandler = async () => {
+        setAnswer(await sendQuestionToChatGPT(question));    
     }
 
     return (
