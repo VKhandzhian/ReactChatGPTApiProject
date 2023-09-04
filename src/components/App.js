@@ -6,6 +6,10 @@ import '../styles/Input.css';
 
 import sendQuestionToChatGPT from '../services/chatGPT.service';
 
+import Textarea from './Textarea/Textarea';
+import Label from './Label/Label';
+import Button from './Button/Button';
+
 const App = () => {
 
     const [question, setQuestion] = useState('');
@@ -21,21 +25,40 @@ const App = () => {
 
     return (
       <body>
-        <div>
-          <label className='question-answer-label' htmlFor='question'>Question:</label>
           <div>
-            <textarea className='question-answer-textarea' id='question' name='question' rows='5' cols='33' onChange={enterQuestion}/>
+              <Label className='question-answer-label' htmlFor='question' value='Question:' />
+              <div>
+                  <Textarea 
+                      className='question-answer-textarea' 
+                      id='question' 
+                      name='question' 
+                      rows='5' 
+                      cols='33' 
+                      onChange={enterQuestion} 
+                      />
+              </div>
+              <div>
+                  <Button 
+                      className='question-button' 
+                      name='Ask'
+                      onClick={questionHandler}
+                      />
+              </div>
           </div>
           <div>
-            <button className='question-button' onClick={questionHandler}>Ask</button>
+              <Label className='question-answer-label' htmlFor='answer' value='Answer:' />
+              <div>
+                  <Textarea 
+                      className='question-answer-textarea' 
+                      isDisabled={true} isReadOnly={true} 
+                      id='answer' 
+                      name='answer' 
+                      rows='5' 
+                      cols='33' 
+                      value={answer} 
+                      />
+              </div>
           </div>
-        </div>
-        <div>
-          <label className='question-answer-label' htmlFor='answer'>Answer:</label>
-          <div>
-            <textarea className='question-answer-textarea' disabled='yes' readOnly='yes' id='answer' name='answer' rows='5' cols='33' value={answer}/>
-          </div>
-        </div>
       </body>
     );
 }
