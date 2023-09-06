@@ -70,8 +70,8 @@ const App = () => {
                       isReadOnly={true} 
                       id='answer' 
                       name='answer' 
-                      rows={answerAreaSize.rows} 
-                      cols={answerAreaSize.columns}
+                      rows={answerAreaSize.rows.toString()} 
+                      cols={answerAreaSize.columns.toString()}
                       value={answer} 
                       />
               </div>
