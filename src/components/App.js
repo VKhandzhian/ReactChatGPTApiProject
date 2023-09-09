@@ -6,10 +6,13 @@ import '../styles/Input.css';
 
 import sendQuestionToChatGPT from '../services/chatGPT.service';
 
+import getNewTextareaSize from '../utils/resizeTextArea.util';
+
+import textareaSizes from '../constants/textarea.constant';
+
 import Textarea from './Textarea/Textarea';
 import Label from './Label/Label';
 import Button from './Button/Button';
-import textareaSizes from '../constants/textarea.constant';
 
 const App = () => {
 
@@ -23,19 +26,9 @@ const App = () => {
 
     const questionHandler = async () => {
         const responseFromChatGPT = await sendQuestionToChatGPT(question);
-        const currentAnswerAreaSize = answerAreaSize.rows * answerAreaSize.columns;    
-    
-        if (currentAnswerAreaSize < responseFromChatGPT.length) {
-            const newColumnNumber = responseFromChatGPT.length / answerAreaSize.rows;
+        const resizedTextArea = getNewTextareaSize(answerAreaSize, responseFromChatGPT);
 
-            if (newColumnNumber > textareaSizes.MAX_COLUMN_NUMBER) {
-                const newRowNumber = responseFromChatGPT.length / textareaSizes.MAX_COLUMN_NUMBER;
-                setAnswerAreaSize({rows: newRowNumber, columns: textareaSizes.MAX_COLUMN_NUMBER});
-            } else {
-                setAnswerAreaSize(prevSize => { return {...prevSize, columns: newColumnNumber}; });
-            }
-        }
-
+        setAnswerAreaSize(resizedTextArea);
         setAnswer(responseFromChatGPT);    
     }
 
